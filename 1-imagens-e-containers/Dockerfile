@@ -1,4 +1,5 @@
 # Imagem base
+# Eh possivel especificar a versao. Ex.: node:14
 FROM node
 
 # Diretorio da aplicacao
