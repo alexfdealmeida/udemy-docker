@@ -1,3 +1,6 @@
 [submodule "git-hooks"]
 	path = git-hooks
 	url = https://github.com/alexfdealmeida/git-hooks.git
+	branch = main
+	ignore = all
+	update = rebase
