@@ -19,6 +19,9 @@ Obs: Antes de empurrar deve-se criar o repositório no Docker Hub e autenticar n
 ## Com volume "bind mount"
 `docker run -d -p 80:80 --name my_udemy_docker_php_messages_app --rm -v C:\workspace-personal\github\udemy-docker\2-volumes\messages:/var/www/html/messages alexfdealmeida/udemy-docker-php-messages-app`
 
+## Com volume "bind mount" (atualização do projeto em tempo real)
+`docker run -d -p 80:80 --name my_udemy_docker_php_messages_app --rm -v C:\workspace-personal\github\udemy-docker\2-volumes\:/var/www/html/ alexfdealmeida/udemy-docker-php-messages-app`
+
 # Acessar aplicacão
 `http://localhost:80`
 
