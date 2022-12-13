@@ -8,3 +8,6 @@ Obs: Antes de empurrar deve-se criar o repositório no Docker Hub e autenticar n
 
 # Executar container da imagem
 docker run -d -p 3000:3000 --name my_udemy_docker_node_app alexfdealmeida/udemy-docker-node-app
+
+# Acessar aplicacão
+http://localhost:3000
