@@ -4,7 +4,7 @@
 # Empurrar imagem
 `docker push alexfdealmeida/udemy-docker-php-messages-app`
 
-Obs: Antes de empurrar deve-se criar o repositório no Docker Hub e autenticar no terminal (docker login).
+Obs: Antes de empurrar deve-se autenticar no terminal (docker login).
 
 # Executar container da imagem
 ## Sem volume
