@@ -8,7 +8,7 @@ Obs: Antes de empurrar deve-se autenticar no terminal (docker login).
 
 # Executar container da imagem
 ## Sem volume
-`docker run -d -p 80:80 --name my_udemy_docker_php_messages_app alexfdealmeida/udemy-docker-php-messages-app`
+`docker run -d -p 80:80 --name my_udemy_docker_php_messages_app --rm alexfdealmeida/udemy-docker-php-messages-app`
 
 ## Com volume anônimo
 `docker run -d -p 80:80 --name my_udemy_docker_php_messages_app --rm -v /data alexfdealmeida/udemy-docker-php-messages-app`

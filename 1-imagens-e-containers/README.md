@@ -7,7 +7,7 @@
 Obs: Antes de empurrar deve-se autenticar no terminal (docker login).
 
 # Executar container da imagem
-`docker run -d -p 3000:3000 --name my_udemy_docker_node_app alexfdealmeida/udemy-docker-node-app`
+`docker run -d -p 3000:3000 --name my_udemy_docker_node_app --rm alexfdealmeida/udemy-docker-node-app`
 
 # Acessar aplicacão
 `http://localhost:3000`
