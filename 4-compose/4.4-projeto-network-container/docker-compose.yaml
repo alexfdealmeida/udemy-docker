@@ -1,0 +1,25 @@
+version: '3.3'
+
+services:
+  db:
+    image: alexfdealmeida/udemy-docker-compose-mysql-db
+    env_file:
+      - ./config/db.env
+    ports:
+      - "3306:3306"
+    restart: always
+    networks:
+      - docker_compose_flask_mysql
+
+  backend:
+    depends_on:
+      - db
+    image: alexfdealmeida/udemy-docker-compose-python-flask-app
+    ports:
+      - "5000:5000"
+    restart: always
+    networks:
+      - docker_compose_flask_mysql
+
+networks:
+  docker_compose_flask_mysql:
