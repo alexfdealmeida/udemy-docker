@@ -1,0 +1,28 @@
+version: '3.3'
+
+services:
+  db:
+    build: ./mysql
+    env_file:
+      - ./config/db.env
+    ports:
+      - "3306:3306"
+    restart: always
+    networks:
+      - docker_compose_flask_mysql
+
+  backend:
+    depends_on:
+      - db
+    build: ./flask
+    ports:
+      - "5000:5000"
+    restart: always
+    #Bind Mount = ..\\diretorio raiz do flask:/WORKDIR da imagem
+    volumes:
+      - "C:\\workspace-personal\\github\\udemy-docker\\4-compose\\4.6-projeto-network-container-bind-mount\\flask:/app"
+    networks:
+      - docker_compose_flask_mysql
+
+networks:
+  docker_compose_flask_mysql:
