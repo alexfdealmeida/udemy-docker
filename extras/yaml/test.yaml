@@ -1,0 +1,32 @@
+# Tipos de dados
+# String
+nome: "Alex"
+sobrenome: Almeida
+# Integer
+idade: 37
+# Float
+altura: 1.78
+# None
+vazio: ~
+vazioAux: null
+# Boolean
+verdadeiro: True
+verdadeiroAux: On
+falso: False
+falsoAux: Off
+
+# Arrays
+lista: ["Alex", Almeida, 37]
+
+listaAux:
+  - "Alex"
+  - Almeida
+  - 37
+
+# Dicionários/Objetos
+objeto: {nome: "Alex", sobrenome: Almeida, idade: 37}
+
+objetoAux:
+  nome: "Alex"
+  sobrenome: Almeida
+  idade: 37
