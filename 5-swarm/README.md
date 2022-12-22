@@ -4,13 +4,13 @@
 # Connection data
 
 ## Node1
-`ssh -i "aws-udemy-docker.pem" ec2-user@ec2-52-7-32-16.compute-1.amazonaws.com`
+`ssh -i "aws-udemy-docker.pem" ec2-user@ec2-35-174-115-64.compute-1.amazonaws.com`
 
 ## Node2
-`ssh -i "aws-udemy-docker.pem" ec2-user@ec2-54-197-155-94.compute-1.amazonaws.com`
+`ssh -i "aws-udemy-docker.pem" ec2-user@ec2-34-201-77-114.compute-1.amazonaws.com`
 
 ## Node3
-`ssh -i "aws-udemy-docker.pem" ec2-user@ec2-44-206-231-231.compute-1.amazonaws.com`
+`ssh -i "aws-udemy-docker.pem" ec2-user@ec2-54-146-177-58.compute-1.amazonaws.com`
 
 # Docker install (All Nodes)
 `sudo yum update -y`
