@@ -44,3 +44,11 @@
 
 ## Remove
 `docker service rm nginx-swarm`
+
+# Compose
+
+## One Instance
+`docker stack deploy -c docker-compose.yaml nginx-swarm-compose`
+
+## Multiple Intances
+`docker service scale nginx-swarm-compose_web=3`
