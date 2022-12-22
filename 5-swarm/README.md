@@ -52,3 +52,13 @@
 
 ## Multiple Intances
 `docker service scale nginx-swarm-compose_web=3`
+
+# Exemplo de atualização do serviço
+
+## Imagem
+`docker service update --image nginx:1.18.0 nginx-swarm-compose_web`
+`docker service update --image nginx:latest nginx-swarm-compose_web`
+
+## Rede
+`docker network create --driver overlay swarm_network`
+`docker service update --network-add swarm_network nginx-swarm-compose_web`
