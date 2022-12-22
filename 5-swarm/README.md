@@ -20,11 +20,24 @@
 
 # Manager Node (Node1)
 ## Init
-`docker swarm init --advertise-addr 52.7.32.16`
+`docker swarm init --advertise-addr 35.174.115.64`
 
 # Worker Node (Node2 e Node3)
 ## Join
-`docker swarm join --token SWMTKN-1-1ycvq9t5vlacgpvnkx4jp59ytstzjgoylzmqciv9qfcquyh34o-c11p0e44m960y3ffxysthk78r 52.7.32.16:2377`
+`docker swarm join --token SWMTKN-1-35swk8r5587r0q8rsvrz99gdvasegznm3u3ni8bi2bc8qwusqt-7ygwr4pw74ju7x7sfy8eck55k 35.174.115.64:2377`
 
 # Service
+
+## Create
+### One Instance
 `docker service create --name nginx-swarm -p 80:80 nginx`
+
+### Multiple Instances
+`docker service create --name nginx-swarm --replicas 3 -p 80:80 nginx`
+
+## List
+
+`docker service ls`
+
+## Remove
+`docker service rm nginx-swarm`
