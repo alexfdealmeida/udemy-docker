@@ -22,8 +22,11 @@
 ## Init
 `docker swarm init --advertise-addr 35.174.115.64`
 
+## Show Join
+`docker swarm join-token manager`
+
 # Worker Node (Node2 e Node3)
-## Join
+## Add Join
 `docker swarm join --token SWMTKN-1-35swk8r5587r0q8rsvrz99gdvasegznm3u3ni8bi2bc8qwusqt-7ygwr4pw74ju7x7sfy8eck55k 35.174.115.64:2377`
 
 # Service
