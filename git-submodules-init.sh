@@ -1,22 +1,37 @@
 #!/bin/bash
 
+vCommandGit="git"
+
+vKernelRelease="$(uname -r)"
+vKernelRelease=${vKernelRelease,,}
+
+if [[ $vKernelRelease =~ "microsoft" ]] || [[ $vKernelRelease =~ "wsl" ]]; then
+	cAliasGitExe="alias $vCommandGit='$vCommandGit.exe'"
+
+	searchReturn="$(gsk_bashrc_list | grep -x -m 1 "$cAliasGitExe")"
+
+	if [ "$searchReturn" == "$cAliasGitExe" ]; then
+		vCommandGit+=".exe"
+	fi
+fi
+
 vFileGitModules=".gitmodules"
-vCommandGitSubmoduleInit="git submodule init"
-vCommandGitSubmoduleUpdate="git submodule update --remote"
+vCommandGitSubmoduleInit="$vCommandGit submodule init"
+vCommandGitSubmoduleUpdate="$vCommandGit submodule update --remote"
 
 changedGitmodules=false
 
 pPAT="$1"
 
-function resetarGitmodules () {
+resetarGitmodules () {
 	if [ "$changedGitmodules" = true ]; then
 		echo "Resetando alteracoes no arquivo '$vFileGitModules'"
-		git -c core.hooksPath=/dev/null checkout $vFileGitModules
+		$vCommandGit -c core.hooksPath=/dev/null checkout $vFileGitModules
 	fi
 }
 
 if [ -f $vFileGitModules ]; then
-	urlSuperproject="$(git config --local --get remote.origin.url)"
+	urlSuperproject="$($vCommandGit config --local --get remote.origin.url)"
 
 	if [[ "$urlSuperproject" =~ "git@" ]]; then
 		# Nao foi possivel utilizar URL relativas (dinamicas em relacao ao protocolo utilizado no superprojeto). 
@@ -31,14 +46,14 @@ if [ -f $vFileGitModules ]; then
 
 		changedGitmodules=true
 
-		git status --short
+		$vCommandGit status --short
 	elif [ -n "$pPAT" ]; then
 		echo "Adicionando o PAT nas URLs dos submodules"
 		sed -i -e "s/\(dev.azure.com\)/$pPAT@\1/" $vFileGitModules
 
 		changedGitmodules=true
 
-		git status --short
+		$vCommandGit status --short
 	fi
 
 	echo "Inicializando submodules: $vCommandGitSubmoduleInit"
@@ -49,7 +64,7 @@ if [ -f $vFileGitModules ]; then
 	fi
 
 	if [[ "$(cat $vFileGitModules)" =~ "branch = ." ]]; then
-		currentBranch="$(git branch | grep ^* | sed "s/*//" | sed "s/ //")"
+		currentBranch="$($vCommandGit branch | grep ^* | sed "s/*//" | sed "s/ //")"
 
 		if [[ "$currentBranch" =~ "(" ]]; then
 			# Em se tratando de um submodule que eh filho de outro submodule, ao tentar fazer um
@@ -60,7 +75,7 @@ if [ -f $vFileGitModules ]; then
 			# Obs.: Se remover o parametro '--remote', nao ocorreria o erro, porem, o update seria feito para o commit registrado no superprojeto (gitlink).
 			echo "Branch corrente: $currentBranch"
 
-			defaultBranch="$(git remote show origin | grep "HEAD branch" | cut -d ':' -f 2 | sed 's/ //g')"
+			defaultBranch="$($vCommandGit remote show origin | grep "HEAD branch" | cut -d ':' -f 2 | sed 's/ //g')"
 
 			if [ -n "$defaultBranch" ]; then
 				echo "Substituindo a configuracao para rastrear o branch corrente do superprojeto 'branch = .' pelo branch default 'branch = $defaultBranch'"
@@ -75,7 +90,7 @@ if [ -f $vFileGitModules ]; then
 
 			changedGitmodules=true
 
-			git status --short
+			$vCommandGit status --short
 		fi
 	fi
 
@@ -87,11 +102,11 @@ if [ -f $vFileGitModules ]; then
 
 		echo "NAO foi possivel clonar/atualizar o(s) submodule(s)!"
 
-		git submodule -q foreach "
-			git rebase --abort > /dev/null 2>&1 || echo Nao ha um rebase em andamento! > /dev/null
+		$vCommandGit submodule -q foreach "
+			$vCommandGit rebase --abort > /dev/null 2>&1 || echo Nao ha um rebase em andamento! > /dev/null
 		"
-		git submodule -q foreach "
-			git merge --abort > /dev/null 2>&1 || echo Nao ha um merge em andamento! > /dev/null
+		$vCommandGit submodule -q foreach "
+			$vCommandGit merge --abort > /dev/null 2>&1 || echo Nao ha um merge em andamento! > /dev/null
 		"
 	fi
 
