@@ -5,16 +5,18 @@ vFilePackageJson="package.json"
 if [ -f $vFilePackageJson ]; then
 	vCommandNpmInstall="npm ci"
 
-	vKernelRelease="$(uname -r)"
-	vKernelRelease=${vKernelRelease,,}
+	if [[ "$(pwd)" =~ ^/mnt/ ]]; then
+		vKernelRelease="$(uname -r)"
+		vKernelRelease=${vKernelRelease,,}
 
-	if [[ $vKernelRelease =~ "microsoft" ]] || [[ $vKernelRelease =~ "wsl" ]]; then
-		cAliasGitExe="alias git='git.exe'"
+		if [[ $vKernelRelease =~ "microsoft" ]] || [[ $vKernelRelease =~ "wsl" ]]; then
+			cAliasGitExe="alias git='git.exe'"
 
-		searchReturn="$(gsk_bashrc_list | grep -x -m 1 "$cAliasGitExe")"
+			searchReturn="$(gsk_bashrc_list | grep -x -m 1 "$cAliasGitExe")"
 
-		if [ "$searchReturn" == "$cAliasGitExe" ]; then
-			vCommandNpmInstall="cmd.exe /c $vCommandNpmInstall"
+			if [ "$searchReturn" == "$cAliasGitExe" ]; then
+				vCommandNpmInstall="cmd.exe /c $vCommandNpmInstall"
+			fi
 		fi
 	fi
 
