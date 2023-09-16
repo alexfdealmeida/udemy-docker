@@ -22,20 +22,12 @@ vPrefixGettingStarted="[$vScriptName]"
 
 vScriptGitSubmodulesInit="git-submodules-init.sh"
 vScriptGitSubmodulesUpdate="git-submodules-update.sh"
-vScriptNodeNpmInstall="node-npm-install.sh"
 vScriptCopyGitHooks="copy-git-hooks.sh"
 
 if [ -f $vScriptGitSubmodulesInit ]; then
 	echo "$vPrefixGettingStarted $vScriptGitSubmodulesInit"
 	chmod +x $vScriptGitSubmodulesInit
 	./$vScriptGitSubmodulesInit
-	echo ""
-fi
-
-if [ -f $vScriptNodeNpmInstall ]; then
-	echo "$vPrefixGettingStarted $vScriptNodeNpmInstall"
-	chmod +x $vScriptNodeNpmInstall
-	./$vScriptNodeNpmInstall
 	echo ""
 fi
 
