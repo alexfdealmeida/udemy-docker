@@ -1,23 +1,7 @@
 #!/bin/bash
 
-vCommandGit="git"
-
-vKernelRelease="$(uname -r)"
-vKernelRelease=${vKernelRelease,,}
-
-if [[ $vKernelRelease =~ "microsoft" ]] || [[ $vKernelRelease =~ "wsl" ]]; then
-	cAliasGitExe="alias $vCommandGit='$vCommandGit.exe'"
-
-	searchReturn="$(gsk_bashrc_list | grep -x -m 1 "$cAliasGitExe")"
-
-	if [ "$searchReturn" == "$cAliasGitExe" ]; then
-		vCommandGit+=".exe"
-	fi
-fi
-
 vRepositoryGitHooks="git-hooks"
 vOrganizationName="alexfdealmeida"
-vRepositoryName="$(basename -s .git `$vCommandGit config --local --get remote.origin.url`)"
 vScriptSubmodulesUpdate="git-submodules-update.sh"
 vScriptCopyGitHooksOrganization="$vRepositoryGitHooks/scripts/shell/github/$vOrganizationName/copy-git-hooks.sh"
 
