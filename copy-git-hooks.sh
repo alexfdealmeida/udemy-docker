@@ -1,18 +1,20 @@
 #!/bin/bash
 
-vRepositoryGitHooks="git-hooks"
-vOrganizationName="alexfdealmeida"
-vScriptSubmodulesUpdate="git-submodules-update.sh"
-vScriptCopyGitHooksOrganization="$vRepositoryGitHooks/scripts/shell/github/$vOrganizationName/copy-git-hooks.sh"
+ALERT="[alert]"
+INFO="[info]"
+ERROR="[ERROR]"
+REPOSITORY_GIT_HOOKS="git-hooks"
+SCRIPT_GIT_SUBMODULES_UPDATE="git-submodules-update.sh"
+SCRIPT_COPY_GIT_HOOKS="$REPOSITORY_GIT_HOOKS/scripts/shell/github/alexfdealmeida/copy-git-hooks.sh"
 
-if [ -d $vRepositoryGitHooks/ ]; then
+if [ -d $REPOSITORY_GIT_HOOKS/ ]; then
 	if [ "$1" != "--no-update-submodules" ]; then
-		chmod +x $vScriptSubmodulesUpdate
+		chmod +x $SCRIPT_GIT_SUBMODULES_UPDATE
 
 		if [ "$1" == "--update-only-git-hooks" ]; then
-			./$vScriptSubmodulesUpdate --update-only-git-hooks
+			./$SCRIPT_GIT_SUBMODULES_UPDATE --update-only-git-hooks
 		else
-			./$vScriptSubmodulesUpdate
+			./$SCRIPT_GIT_SUBMODULES_UPDATE
 		fi
 	fi
 
@@ -22,11 +24,11 @@ if [ -d $vRepositoryGitHooks/ ]; then
 		vGitdirSubmodule=""
 	fi
 
-	if [ -f $vScriptCopyGitHooksOrganization ]; then
-		chmod +x $vScriptCopyGitHooksOrganization
+	if [ -f $SCRIPT_COPY_GIT_HOOKS ]; then
+		chmod +x $SCRIPT_COPY_GIT_HOOKS
 
-		./$vScriptCopyGitHooksOrganization "$vGitdirSubmodule"
+		./$SCRIPT_COPY_GIT_HOOKS "$vGitdirSubmodule"
 	else
-		echo "Nao foi possivel localizar o script $vScriptCopyGitHooksOrganization"
+		echo "$ALERT Nao foi possivel localizar o script $SCRIPT_COPY_GIT_HOOKS"
 	fi
 fi
